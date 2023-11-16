@@ -12,11 +12,14 @@
             <a href="#" class="btn btn-outline-dark mt-3">Add to car listings</a>
 
         </div>
+
+{%if current_user%}
         <div class="row bg-dark p-3 shop-stats">
             <div class="col d-flex justify-content-center">Total # of Customers: 0</div>
             <div class="col d-flex justify-content-center">Total Sales : $0</div>
             <div class="col d-flex justify-content-center">Total # of Products: 0</div>
         </div>
     </div>
+{%endif%}
 </div>
 {% endblock content %}

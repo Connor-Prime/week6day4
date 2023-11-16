@@ -20,3 +20,11 @@
     font-size: large;
     color: white;
 }
+
+body{
+    background-color: rgb(57, 55, 55);
+}
+
+.white-background{
+    background-color: rgb(152, 208, 208);
+}
