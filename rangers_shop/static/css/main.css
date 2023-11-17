@@ -2,7 +2,7 @@
 
 
 .shop-header {
-    background-image: url("https://hips.hearstapps.com/hmg-prod/images/2024-lamborghini-revuelto-127-641a1d518802b.jpg?crop=0.813xw:0.721xh;0.0994xw,0.128xh&resize=1200:*");
+    background-image: url("https://gamewardbound.com/wp-content/uploads/2020/11/ikea-kallax-shelves-complete-second-shelf.jpg");
     background-size: cover;
     height: 1200px;
     color: rgba(255, 255, 255, 0.668); 
@@ -27,4 +27,8 @@ body{
 
 .white-background{
     background-color: rgb(152, 208, 208);
+}
+
+.black-text{
+    color: black;
 }

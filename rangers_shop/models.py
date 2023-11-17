@@ -3,13 +3,13 @@ from flask_sqlalchemy import SQLAlchemy #this is our ORM (Object Relational Mapp
 from flask_login import UserMixin, LoginManager #helping us load a user as our current_user 
 from datetime import datetime #put a timestamp on any data we create (Users, Products, etc)
 import uuid #makes a unique id for our data (primary key)
-
+from flask_marshmallow import Marshmallow
 
 
 #instantiate all our classes
 db = SQLAlchemy() #make database object
 login_manager = LoginManager() #makes login object 
-
+ma = Marshmallow()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -58,3 +58,46 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<User: {self.username}>"
+
+class Product(db.Model):
+    prod_id = db.Column(db.String, primary_key=True)
+    name = db.Column(db.String(50), nullable=False)
+    image = db.Column(db.String)
+    description = db.Column(db.String(200))
+    quantity = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Numeric(precision=10, scale=2), nullable=False)
+    # Playtime is the minutes to finish a game
+    playtime = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, name, quantity, price, playtime, image ="", description = ""):
+        self.prod_id = self.set_id()
+        self.name = name
+        self.quantity = quantity
+        self.price = price
+        self.playtime = playtime
+        self.image = image
+        self.description = description
+
+
+    def set_id(self):
+        return str(uuid.uuid4())
+    
+
+    def decremenet_quantity(self,amount):
+        self.quantity -=int(amount)
+        return self.quantity
+    
+    def incremenet_quantity(self, amount):
+        self.quantity += int(amount)
+        return self.quantity
+    
+    def __repr__(self):
+        return f"<Product: {self.name}>"
+    
+class ProductSchema(ma.Schema):
+
+    class Meta:
+        fields=['prod_id', 'name', 'image', 'description', 'price','playtime']
+
+product_schema = ProductSchema()
+products_schema = ProductSchema(many=True)
